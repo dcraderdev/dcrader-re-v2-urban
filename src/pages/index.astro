@@ -1,0 +1,873 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+
+const listings = [
+  {
+    address: '420 Park Avenue S',
+    neighborhood: 'Flatiron',
+    unit: '',
+    price: '$4,200,000',
+    beds: 3,
+    baths: '2.5',
+    sqft: '1,840',
+    desc: 'Pre-war grandeur meets contemporary finish on the Flatiron\'s most coveted block.',
+    img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=85&fit=crop&auto=format',
+  },
+  {
+    address: '15 Hudson Yards',
+    neighborhood: 'Hudson Yards',
+    unit: '#42E',
+    price: '$6,800,000',
+    beds: 2,
+    baths: '2',
+    sqft: '1,620',
+    desc: 'Corner residence with direct Hudson River views on the 42nd floor.',
+    img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=85&fit=crop&auto=format',
+  },
+  {
+    address: '220 Riverside Blvd',
+    neighborhood: 'Upper West Side',
+    unit: '#38A',
+    price: '$3,100,000',
+    beds: 3,
+    baths: '3',
+    sqft: '2,100',
+    desc: 'Expansive riverside living with Central Park proximity and full amenity building.',
+    img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=85&fit=crop&auto=format',
+  },
+  {
+    address: '432 Park Penthouse',
+    neighborhood: 'Midtown',
+    unit: 'PH',
+    price: '$32,000,000',
+    beds: 4,
+    baths: '4.5',
+    sqft: '4,020',
+    desc: 'The pinnacle of Manhattan. 360-degree skyline views from the world\'s tallest residential tower.',
+    img: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=900&q=85&fit=crop&auto=format',
+  },
+  {
+    address: '56 Leonard St',
+    neighborhood: 'Tribeca',
+    unit: '#29A',
+    price: '$2,850,000',
+    beds: 2,
+    baths: '2',
+    sqft: '1,340',
+    desc: 'Jenga tower residence in the heart of Tribeca. South-facing with extraordinary ceiling heights.',
+    img: 'https://images.unsplash.com/photo-1600607687939-ce8a6d2d6a55?w=900&q=85&fit=crop&auto=format',
+  },
+  {
+    address: '111 Murray St',
+    neighborhood: 'Tribeca',
+    unit: '#27C',
+    price: '$2,400,000',
+    beds: 2,
+    baths: '2',
+    sqft: '1,180',
+    desc: 'Full-service luxury condominium steps from the Hudson River Greenway.',
+    img: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=900&q=85&fit=crop&auto=format',
+  },
+];
+---
+
+<Layout>
+  <!-- ============================================================
+       NAV — NEWSPAPER MASTHEAD
+       ============================================================ -->
+  <header
+    id="masthead"
+    class="fixed top-0 left-0 right-0 z-50 bg-ink transition-all duration-300"
+    style="border-bottom: 1px solid transparent;"
+  >
+    <!-- Top meta line -->
+    <div class="px-6 pt-3 pb-1 flex items-center justify-between">
+      <span class="font-mono text-xs text-white/40 uppercase tracking-widest">
+        Manhattan Luxury Residences
+      </span>
+      <span id="nav-date" class="font-mono text-xs text-white/40 uppercase tracking-widest"></span>
+    </div>
+
+    <!-- Thick rule -->
+    <div class="h-[2px] bg-white mx-6"></div>
+
+    <!-- Masthead name -->
+    <div class="px-6 py-2 text-center">
+      <a
+        href="#top"
+        class="block font-sans font-black text-white leading-none tracking-tighter"
+        style="font-size: clamp(2.5rem, 7vw, 5rem); letter-spacing: -0.03em;"
+      >
+        MARCUS CHEN
+      </a>
+    </div>
+
+    <!-- Thin rule -->
+    <div class="h-px bg-white/20 mx-6"></div>
+
+    <!-- Nav links -->
+    <nav class="px-6 py-2 flex items-center justify-center gap-6 md:gap-10">
+      {[
+        ['PROPERTIES', '#listings'],
+        ['NEIGHBORHOODS', '#listings'],
+        ['ABOUT', '#about'],
+        ['RECORD', '#testimonials'],
+        ['CONTACT', '#contact'],
+      ].map(([label, href]) => (
+        <a
+          href={href}
+          class="font-sans font-semibold text-xs text-white/70 uppercase tracking-widest hover:text-white transition-colors duration-200"
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Bottom thin rule -->
+    <div class="h-px bg-white/20 mx-6"></div>
+  </header>
+
+  <!-- ============================================================
+       HERO — 4-COLUMN NEWSPAPER LAYOUT
+       ============================================================ -->
+  <section
+    id="top"
+    class="min-h-screen bg-ink grid grid-cols-1 md:grid-cols-2"
+    style="padding-top: clamp(140px, 18vw, 200px);"
+  >
+    <!-- Left: Text content -->
+    <div class="flex flex-col justify-center px-8 md:px-12 lg:px-16 py-12 border-r border-white/10">
+      <!-- Issue label -->
+      <p class="font-mono text-xs text-white/30 uppercase tracking-widest mb-4">
+        Vol. XIV, No. 847
+      </p>
+
+      <!-- Thin rule -->
+      <div class="h-px bg-white/20 mb-8"></div>
+
+      <!-- H1 -->
+      <h1
+        class="font-sans font-black text-white leading-none mb-8"
+        style="font-size: clamp(2.4rem, 5.5vw, 5rem); letter-spacing: -0.03em;"
+      >
+        The City's Most<br />Connected<br />Broker
+      </h1>
+
+      <!-- Thick rule -->
+      <div class="h-[2px] bg-white/20 mb-8"></div>
+
+      <!-- Pull quote -->
+      <blockquote class="mb-8">
+        <p
+          class="font-sans italic text-white/60 leading-relaxed"
+          style="font-size: clamp(1rem, 1.6vw, 1.2rem);"
+        >
+          "In fourteen years, I have never listed a property<br class="hidden md:block" />
+          I wouldn't buy myself."
+        </p>
+        <footer class="mt-3 font-mono text-xs text-white/40 uppercase tracking-widest">
+          — Marcus Chen, Licensed Associate Broker
+        </footer>
+      </blockquote>
+
+      <!-- Thin rule -->
+      <div class="h-px bg-white/20 mb-8"></div>
+
+      <!-- CTA -->
+      <div class="flex flex-col sm:flex-row items-start gap-4 mb-8">
+        <a
+          href="#listings"
+          class="inline-block bg-cobalt hover:bg-cobalt-dark text-white font-sans font-black text-sm uppercase tracking-widest px-8 py-4 transition-colors duration-200"
+          style="letter-spacing: 0.12em;"
+        >
+          Explore Current Listings →
+        </a>
+      </div>
+
+      <!-- Contact info -->
+      <p class="font-mono text-xs text-white/40 uppercase tracking-wider">
+        (212) 555-0847 · marcus@compass.com
+      </p>
+    </div>
+
+    <!-- Right: Hero image -->
+    <div class="relative min-h-[60vh] md:min-h-full overflow-hidden">
+      <img
+        src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=2000&q=90&fit=crop&auto=format"
+        alt="Manhattan skyline"
+        class="absolute inset-0 w-full h-full object-cover grayscale-photo-hero"
+        style="filter: grayscale(1) contrast(1.15);"
+        loading="eager"
+      />
+      <!-- Gradient overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent"></div>
+      <!-- Active listings badge -->
+      <div
+        class="absolute bottom-6 right-6 bg-cobalt px-4 py-2"
+      >
+        <span class="font-mono text-xs text-white uppercase tracking-widest font-medium">
+          6 Active Listings
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       NUMBERS TICKER STRIP
+       ============================================================ -->
+  <section class="w-full bg-cobalt overflow-hidden py-4" aria-label="Statistics">
+    <div class="flex animate-marquee whitespace-nowrap" style="width: max-content;">
+      <!-- First copy -->
+      <span class="font-sans font-black text-white uppercase tracking-widest text-sm px-6">
+        520+ UNITS SOLD
+        <span class="mx-6 text-white/40">·</span>
+        14 YEARS IN MARKET
+        <span class="mx-6 text-white/40">·</span>
+        12 DAYS AVG ON MARKET
+        <span class="mx-6 text-white/40">·</span>
+        89 OFF-MARKET DEALS
+        <span class="mx-6 text-white/40">·</span>
+        $4.2B TOTAL VOLUME
+        <span class="mx-6 text-white/40">·</span>
+        97% LIST-PRICE RATIO
+        <span class="mx-8 text-white/40">·</span>
+      </span>
+      <!-- Duplicate for seamless loop -->
+      <span class="font-sans font-black text-white uppercase tracking-widest text-sm px-6">
+        520+ UNITS SOLD
+        <span class="mx-6 text-white/40">·</span>
+        14 YEARS IN MARKET
+        <span class="mx-6 text-white/40">·</span>
+        12 DAYS AVG ON MARKET
+        <span class="mx-6 text-white/40">·</span>
+        89 OFF-MARKET DEALS
+        <span class="mx-6 text-white/40">·</span>
+        $4.2B TOTAL VOLUME
+        <span class="mx-6 text-white/40">·</span>
+        97% LIST-PRICE RATIO
+        <span class="mx-8 text-white/40">·</span>
+      </span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LISTINGS — NEWSPAPER COLUMN LAYOUT
+       ============================================================ -->
+  <section id="listings" class="bg-paper py-16 px-6 md:px-12 lg:px-16">
+    <!-- Section header -->
+    <div class="mb-10 max-w-screen-xl mx-auto">
+      <div class="h-[3px] bg-ink mb-4"></div>
+      <p class="font-mono text-xs text-ink/50 uppercase tracking-widest mb-2">
+        Current Properties
+      </p>
+      <h2
+        class="font-sans font-black text-ink leading-none"
+        style="font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.03em;"
+      >
+        Manhattan Offerings
+      </h2>
+      <div class="h-px bg-ink/20 mt-4"></div>
+    </div>
+
+    <!-- 3-column newspaper grid -->
+    <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-0">
+      {listings.map((listing, i) => (
+        <article
+          class="border-ink/15 py-8 px-0 md:px-6"
+          style={{
+            borderTop: '1px solid rgba(12,12,12,0.15)',
+            borderLeft: i % 3 !== 0 ? '1px solid rgba(12,12,12,0.15)' : 'none',
+          }}
+        >
+          <!-- Photo -->
+          <div class="w-full mb-4 overflow-hidden" style="aspect-ratio: 4/3;">
+            <img
+              src={listing.img}
+              alt={listing.address}
+              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+              style="filter: grayscale(1) contrast(1.1);"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Neighborhood tag -->
+          <p class="font-mono text-xs text-cobalt uppercase tracking-widest mb-2">
+            {listing.neighborhood}
+          </p>
+
+          <!-- Address -->
+          <h3 class="font-sans font-bold text-ink text-lg leading-tight mb-1">
+            {listing.address}{listing.unit ? ` ${listing.unit}` : ''}
+          </h3>
+
+          <!-- Descriptor -->
+          <p class="font-sans text-ink/60 text-sm leading-snug mb-3">
+            {listing.desc}
+          </p>
+
+          <!-- Specs -->
+          <p class="font-mono text-xs text-ink/50 uppercase tracking-wide mb-3">
+            {listing.beds} BR · {listing.baths} BA · {listing.sqft} SF
+          </p>
+
+          <!-- Thin rule -->
+          <div class="h-px bg-ink/15 mb-3"></div>
+
+          <!-- Price -->
+          <p class="font-sans font-black text-ink text-xl" style="letter-spacing: -0.02em;">
+            {listing.price}
+          </p>
+        </article>
+      ))}
+    </div>
+
+    <!-- View all CTA -->
+    <div class="max-w-screen-xl mx-auto mt-12 pt-8 border-t border-ink/15 flex items-center justify-between">
+      <p class="font-mono text-xs text-ink/40 uppercase tracking-widest">
+        Showing 6 of 6 active Manhattan listings
+      </p>
+      <a
+        href="#contact"
+        class="font-sans font-black text-xs text-ink uppercase tracking-widest hover:text-cobalt transition-colors duration-200"
+        style="letter-spacing: 0.12em;"
+      >
+        Inquire About Off-Market →
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT — INTERVIEW FORMAT
+       ============================================================ -->
+  <section id="about" class="bg-ink py-16 px-6 md:px-12 lg:px-16">
+    <div class="max-w-screen-xl mx-auto">
+      <!-- Section label -->
+      <div class="mb-10">
+        <div class="h-[2px] bg-white/10 mb-4"></div>
+        <p class="font-mono text-xs text-cobalt uppercase tracking-widest">Profile</p>
+      </div>
+
+      <!-- Two-column layout -->
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-0 md:gap-16">
+        <!-- Left: Portrait -->
+        <div class="md:col-span-2 mb-10 md:mb-0">
+          <div class="w-full overflow-hidden mb-6" style="aspect-ratio: 3/4; max-height: 560px;">
+            <img
+              src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=85&fit=crop&auto=format"
+              alt="Marcus Chen, Associate Broker"
+              class="w-full h-full object-cover"
+              style="filter: grayscale(1) contrast(1.1);"
+              loading="lazy"
+            />
+          </div>
+          <!-- Vertical large MC monogram below image on desktop -->
+          <div class="hidden md:block">
+            <p
+              class="font-sans font-black text-white/5 leading-none select-none"
+              style="font-size: 10rem; letter-spacing: -0.05em;"
+            >
+              MC
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Content -->
+        <div class="md:col-span-3 flex flex-col justify-start">
+          <!-- Name -->
+          <h2
+            class="font-sans font-black text-white leading-none mb-2"
+            style="font-size: clamp(2.8rem, 6vw, 5.5rem); letter-spacing: -0.04em;"
+          >
+            Marcus<br />Chen
+          </h2>
+          <p class="font-mono text-xs text-white/30 uppercase tracking-widest mb-8">
+            Licensed Associate Broker · Compass · New York
+          </p>
+
+          <!-- By the Numbers -->
+          <div class="mb-8">
+            <div class="flex items-center gap-4 mb-4">
+              <p class="font-sans font-black text-white text-sm uppercase tracking-widest">
+                By the Numbers
+              </p>
+              <div class="flex-1 h-px bg-white/20"></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-0">
+              {[
+                { stat: '520+', label: 'Units Sold' },
+                { stat: '14', label: 'Years In Market' },
+                { stat: '89', label: 'Off-Market Deals' },
+                { stat: '$4.2B', label: 'Total Volume' },
+              ].map((item, i) => (
+                <div
+                  class="py-6 px-6"
+                  style={{
+                    borderTop: '1px solid rgba(255,255,255,0.1)',
+                    borderLeft: i % 2 !== 0 ? '1px solid rgba(255,255,255,0.1)' : 'none',
+                  }}
+                >
+                  <p
+                    class="font-sans font-black text-white leading-none mb-1"
+                    style="font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.03em;"
+                  >
+                    {item.stat}
+                  </p>
+                  <p class="font-mono text-xs text-white/40 uppercase tracking-widest">
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Bio -->
+          <div class="mb-8">
+            <div class="h-px bg-white/10 mb-6"></div>
+            <p class="font-sans text-paper/60 leading-relaxed text-base">
+              Marcus Chen has spent fourteen years becoming the most connected broker
+              in Manhattan real estate. A Columbia graduate who turned down finance to
+              study how cities work at street level, Marcus has built a practice entirely
+              on trust: clients refer him exclusively, developers call him before listing,
+              and off-market sellers choose him because discretion is absolute.
+            </p>
+            <p class="font-sans text-paper/60 leading-relaxed text-base mt-4">
+              His market spans Tribeca to the Upper West Side, with particular depth in
+              Flatiron, Hudson Yards, and the historic loft buildings of SoHo. He does not
+              advertise. He does not pitch. He executes.
+            </p>
+          </div>
+
+          <!-- Education + Credentials -->
+          <div>
+            <div class="flex items-center gap-4 mb-4">
+              <p class="font-sans font-black text-white text-sm uppercase tracking-widest">
+                Education + Credentials
+              </p>
+              <div class="flex-1 h-px bg-white/20"></div>
+            </div>
+            <ul class="space-y-2">
+              {[
+                'B.A. Urban Studies, Columbia University, 2008',
+                'Licensed Associate Real Estate Broker, NY State',
+                'Certified Luxury Home Marketing Specialist (CLHMS)',
+                'Member, Real Estate Board of New York (REBNY)',
+                'Top 1% Compass Agent, NYC Region — 2019–2024',
+                'Fluent: English, Mandarin, conversational French',
+              ].map((item) => (
+                <li class="font-mono text-xs text-paper/50 flex items-start gap-3">
+                  <span class="text-cobalt mt-px select-none">—</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TESTIMONIALS — NEWSPAPER QUOTE BOXES
+       ============================================================ -->
+  <section id="testimonials" class="bg-paper py-16 px-6 md:px-12 lg:px-16">
+    <div class="max-w-screen-xl mx-auto">
+      <!-- Section header -->
+      <div class="mb-10">
+        <div class="h-[3px] bg-ink mb-4"></div>
+        <p class="font-mono text-xs text-ink/50 uppercase tracking-widest mb-2">
+          Client Record
+        </p>
+        <h2
+          class="font-sans font-black text-ink leading-none"
+          style="font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.03em;"
+        >
+          What Clients Say
+        </h2>
+        <div class="h-px bg-ink/20 mt-4"></div>
+      </div>
+
+      <!-- First testimonial: full-width, large -->
+      <div class="border border-ink/15 p-8 md:p-12 mb-0 relative">
+        <!-- Opening quote mark -->
+        <span
+          class="absolute top-4 left-8 font-sans font-black text-cobalt leading-none select-none"
+          style="font-size: 8rem; line-height: 1; opacity: 0.15;"
+          aria-hidden="true"
+        >"</span>
+
+        <blockquote class="relative z-10">
+          <p
+            class="font-sans font-black text-ink leading-snug mb-6"
+            style="font-size: clamp(1.3rem, 3vw, 2.2rem); letter-spacing: -0.02em;"
+          >
+            "In fourteen years of buying Manhattan real estate, I have never worked with
+            a broker who knew this market the way Marcus does. He found us an off-market
+            floor-through in the West Village — before it ever hit StreetEasy."
+          </p>
+          <footer class="font-mono text-xs text-ink/50 uppercase tracking-widest">
+            — David &amp; Priya Goldstein · West Village
+          </footer>
+        </blockquote>
+
+        <!-- Closing quote mark -->
+        <span
+          class="absolute bottom-4 right-8 font-sans font-black text-cobalt leading-none select-none"
+          style="font-size: 8rem; line-height: 1; opacity: 0.15;"
+          aria-hidden="true"
+        >"</span>
+      </div>
+
+      <!-- Two testimonials side by side -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-t-0">
+        <div class="border border-ink/15 border-t-0 p-8">
+          <p class="font-mono text-xs text-cobalt uppercase tracking-widest mb-4">
+            Flatiron · Sold in 3 Days
+          </p>
+          <blockquote>
+            <p class="font-sans text-ink leading-relaxed text-base mb-4">
+              "Marcus sold our Flatiron apartment in three days, $380,000 over ask.
+              He priced it with complete certainty and executed flawlessly."
+            </p>
+            <footer class="font-mono text-xs text-ink/50 uppercase tracking-widest">
+              — Catherine Marsh · Flatiron
+            </footer>
+          </blockquote>
+        </div>
+
+        <div class="border border-ink/15 border-t-0 border-l-0 md:border-l md:border-l-ink/15 p-8">
+          <p class="font-mono text-xs text-cobalt uppercase tracking-widest mb-4">
+            Tribeca · Off-Market Purchase
+          </p>
+          <blockquote>
+            <p class="font-sans text-ink leading-relaxed text-base mb-4">
+              "The off-market access is real. Marcus showed us four properties that
+              were never listed. We bought the best one."
+            </p>
+            <footer class="font-mono text-xs text-ink/50 uppercase tracking-widest">
+              — James Okafor · Tribeca
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT — FULL DARK
+       ============================================================ -->
+  <section id="contact" class="bg-ink py-16 px-6 md:px-12 lg:px-16">
+    <div class="max-w-screen-xl mx-auto">
+      <!-- Section label -->
+      <div class="mb-10">
+        <div class="h-[2px] bg-white/10 mb-4"></div>
+        <p class="font-mono text-xs text-cobalt uppercase tracking-widest mb-2">Contact</p>
+        <h2
+          class="font-sans font-black text-white leading-none"
+          style="font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: -0.03em;"
+        >
+          Get in Touch
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <!-- Form -->
+        <form
+          class="space-y-0"
+          onsubmit="event.preventDefault(); alert('Thank you. Marcus will be in touch within 24 hours.');"
+        >
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-0">
+            <div class="border border-white/10 p-0">
+              <label class="block font-mono text-xs text-white/40 uppercase tracking-widest px-4 pt-4 pb-1">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                required
+                class="w-full bg-transparent text-white font-sans text-base px-4 pb-4 focus:outline-none placeholder:text-white/20"
+              />
+            </div>
+            <div class="border border-white/10 border-l-0 p-0">
+              <label class="block font-mono text-xs text-white/40 uppercase tracking-widest px-4 pt-4 pb-1">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+                class="w-full bg-transparent text-white font-sans text-base px-4 pb-4 focus:outline-none placeholder:text-white/20"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-0">
+            <div class="border border-white/10 border-t-0 p-0">
+              <label class="block font-mono text-xs text-white/40 uppercase tracking-widest px-4 pt-4 pb-1">
+                Phone
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="(212) 000-0000"
+                class="w-full bg-transparent text-white font-sans text-base px-4 pb-4 focus:outline-none placeholder:text-white/20"
+              />
+            </div>
+            <div class="border border-white/10 border-t-0 border-l-0 p-0">
+              <label class="block font-mono text-xs text-white/40 uppercase tracking-widest px-4 pt-4 pb-1">
+                Property Interest
+              </label>
+              <select
+                name="interest"
+                class="w-full bg-ink text-white font-sans text-base px-4 pb-4 pt-1 focus:outline-none appearance-none cursor-pointer"
+                style="color: rgba(255,255,255,0.7);"
+              >
+                <option value="buying">Buying</option>
+                <option value="selling">Selling</option>
+                <option value="both">Buying &amp; Selling</option>
+                <option value="investment">Investment</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="border border-white/10 border-t-0 p-0">
+            <label class="block font-mono text-xs text-white/40 uppercase tracking-widest px-4 pt-4 pb-1">
+              Message
+            </label>
+            <textarea
+              name="message"
+              rows="5"
+              placeholder="Tell Marcus about your property goals..."
+              class="w-full bg-transparent text-white font-sans text-base px-4 pb-4 focus:outline-none placeholder:text-white/20 resize-none"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-cobalt hover:bg-cobalt-dark text-white font-sans font-black uppercase tracking-widest text-sm py-5 transition-colors duration-200"
+            style="letter-spacing: 0.12em;"
+          >
+            Send Message →
+          </button>
+        </form>
+
+        <!-- Direct contact info -->
+        <div class="flex flex-col justify-center">
+          <div class="h-px bg-white/10 mb-8 hidden md:block"></div>
+
+          <p class="font-mono text-xs text-white/40 uppercase tracking-widest mb-4">
+            Or Call Directly
+          </p>
+
+          <a
+            href="tel:+12125550847"
+            class="font-mono text-white font-medium hover:text-cobalt transition-colors duration-200 block mb-8"
+            style="font-size: clamp(1.5rem, 3.5vw, 2.8rem);"
+          >
+            (212) 555-0847
+          </a>
+
+          <div class="h-px bg-white/10 mb-8"></div>
+
+          <div class="space-y-4">
+            <div>
+              <p class="font-mono text-xs text-white/30 uppercase tracking-widest mb-1">Email</p>
+              <a
+                href="mailto:marcus@compass.com"
+                class="font-sans text-white/70 hover:text-white transition-colors duration-200"
+              >
+                marcus@compass.com
+              </a>
+            </div>
+            <div>
+              <p class="font-mono text-xs text-white/30 uppercase tracking-widest mb-1">Office</p>
+              <p class="font-sans text-white/70">
+                90 Fifth Avenue, 3rd Floor<br />
+                New York, NY 10011
+              </p>
+            </div>
+            <div>
+              <p class="font-mono text-xs text-white/30 uppercase tracking-widest mb-1">Hours</p>
+              <p class="font-sans text-white/70">
+                Monday – Saturday, 8:00 AM – 8:00 PM<br />
+                Sunday by appointment
+              </p>
+            </div>
+          </div>
+
+          <div class="h-px bg-white/10 mt-8 mb-8"></div>
+
+          <p class="font-mono text-xs text-white/20 leading-relaxed">
+            Response guaranteed within 24 hours.<br />
+            Off-market inquiries handled with full discretion.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="bg-ink border-t border-white/10 py-10 px-6 md:px-12 lg:px-16">
+    <div class="max-w-screen-xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <!-- Logo + tagline -->
+        <div>
+          <p
+            class="font-sans font-black text-white leading-none mb-2"
+            style="font-size: 1.6rem; letter-spacing: -0.03em;"
+          >
+            MARCUS CHEN
+          </p>
+          <p class="font-mono text-xs text-white/30 uppercase tracking-widest">
+            Compass · Manhattan Luxury
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <p class="font-mono text-xs text-white/30 uppercase tracking-widest mb-4">Navigate</p>
+          <ul class="space-y-2">
+            {[
+              ['Properties', '#listings'],
+              ['About', '#about'],
+              ['Client Record', '#testimonials'],
+              ['Contact', '#contact'],
+            ].map(([label, href]) => (
+              <li>
+                <a
+                  href={href}
+                  class="font-sans text-sm text-white/50 hover:text-white transition-colors duration-200"
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- License -->
+        <div>
+          <p class="font-mono text-xs text-white/30 uppercase tracking-widest mb-4">Licensing</p>
+          <p class="font-mono text-xs text-white/30 leading-relaxed">
+            NYS Department of State<br />
+            License #1234567<br />
+            <br />
+            Compass Real Estate<br />
+            90 Fifth Avenue, New York NY 10011<br />
+            <br />
+            Equal Housing Opportunity
+          </p>
+        </div>
+      </div>
+
+      <div class="h-px bg-white/10 mb-6"></div>
+
+      <p class="font-mono text-xs text-white/20 text-center uppercase tracking-widest">
+        MARCUS CHEN · COMPASS · NYC LICENSE #1234567 · © 2025
+      </p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       FLOATING CALL BUTTON
+       ============================================================ -->
+  <a
+    id="float-cta"
+    href="tel:+12125550847"
+    class="fixed bottom-8 right-8 z-50 bg-cobalt hover:bg-cobalt-dark text-white font-sans font-black text-xs uppercase tracking-widest px-6 py-4 shadow-2xl transition-all duration-300 opacity-0 pointer-events-none"
+    style="letter-spacing: 0.12em;"
+    aria-label="Call Marcus Chen"
+  >
+    Call Marcus →
+  </a>
+</Layout>
+
+<style>
+  /* Ticker animation */
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  /* Nav scroll state */
+  #masthead.scrolled {
+    border-bottom-color: rgba(255, 255, 255, 0.12) !important;
+  }
+
+  /* Floating button visible state */
+  #float-cta.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Form input focus styles */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 1px #0047FF;
+  }
+
+  /* Ensure no border-radius anywhere */
+  * {
+    border-radius: 0 !important;
+  }
+
+  /* Select arrow color */
+  select option {
+    background-color: #0C0C0C;
+    color: #F5F5F5;
+  }
+</style>
+
+<script>
+  // Populate nav date
+  const dateEl = document.getElementById('nav-date');
+  if (dateEl) {
+    const d = new Date();
+    dateEl.textContent = d.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }).toUpperCase();
+  }
+
+  // Scroll effects: masthead border + floating CTA
+  const masthead = document.getElementById('masthead');
+  const floatCta = document.getElementById('float-cta');
+
+  function onScroll() {
+    const scrolled = window.scrollY > 60;
+    if (masthead) {
+      if (scrolled) {
+        masthead.classList.add('scrolled');
+      } else {
+        masthead.classList.remove('scrolled');
+      }
+    }
+    if (floatCta) {
+      if (window.scrollY > 400) {
+        floatCta.classList.add('visible');
+      } else {
+        floatCta.classList.remove('visible');
+      }
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
