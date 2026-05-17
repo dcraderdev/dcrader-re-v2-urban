@@ -40,8 +40,6 @@ const listings = [
     img: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=85',
   },
 ];
-
-const tickerText = '520 UNITS SOLD · 14 YEARS IN MARKET · $2.1B VOLUME · 89 OFF-MARKET DEALS · 12 DAYS AVG ON MARKET · 98% LIST-TO-SELL RATIO · ';
 ---
 
 <Layout>
@@ -97,18 +95,6 @@ const tickerText = '520 UNITS SOLD · 14 YEARS IN MARKET · $2.1B VOLUME · 89 O
         NYC's most connected broker
       </p>
 
-      <!-- Two stat boxes -->
-      <div class="flex gap-0 mb-10">
-        <div class="border border-white/15 px-6 py-4 flex-1">
-          <p class="font-mono text-3xl text-white font-bold" style="letter-spacing: -0.02em;">520</p>
-          <p class="font-mono text-[10px] text-white/40 uppercase tracking-widest mt-1">UNITS SOLD</p>
-        </div>
-        <div class="border border-white/15 border-l-0 px-6 py-4 flex-1">
-          <p class="font-mono text-3xl text-white font-bold" style="letter-spacing: -0.02em;">14yr</p>
-          <p class="font-mono text-[10px] text-white/40 uppercase tracking-widest mt-1">IN MARKET</p>
-        </div>
-      </div>
-
       <!-- Cobalt CTA -->
       <div>
         <a
@@ -133,15 +119,6 @@ const tickerText = '520 UNITS SOLD · 14 YEARS IN MARKET · $2.1B VOLUME · 89 O
     </div>
   </section>
 
-  <!-- ================================================================
-       STAT TICKER — SCROLLING BLACK BAR
-       ================================================================ -->
-  <div class="bg-black border-t border-b border-white/10 overflow-hidden py-4" aria-hidden="true">
-    <div class="flex whitespace-nowrap" style="animation: ticker 30s linear infinite; display: flex; width: max-content;">
-      <span class="font-mono text-[11px] text-white uppercase tracking-widest px-4">{tickerText}</span>
-      <span class="font-mono text-[11px] text-white uppercase tracking-widest px-4">{tickerText}</span>
-    </div>
-  </div>
 
   <!-- ================================================================
        LISTINGS — 4-COLUMN NEWSPAPER CLASSIFIED
@@ -298,42 +275,6 @@ const tickerText = '520 UNITS SOLD · 14 YEARS IN MARKET · $2.1B VOLUME · 89 O
     </div>
   </section>
 
-  <!-- ================================================================
-       BY THE NUMBERS — 4-CELL GRID
-       ================================================================ -->
-  <section id="numbers" class="bg-silver py-16 px-6 md:px-12 lg:px-16">
-    <div class="max-w-screen-xl mx-auto">
-      <!-- Section masthead -->
-      <div class="mb-10">
-        <div class="h-[3px] bg-black mb-3"></div>
-        <h2 class="font-mono text-[11px] text-black/40 uppercase tracking-widest">BY THE NUMBERS</h2>
-        <div class="h-px bg-black/10 mt-3"></div>
-      </div>
-
-      <!-- 4-cell grid -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-0">
-        {[
-          { stat: '520+', label: 'UNITS SOLD' },
-          { stat: '$2.1B', label: 'TOTAL VOLUME' },
-          { stat: '14', label: 'YEARS IN MARKET' },
-          { stat: '89', label: 'OFF-MARKET DEALS' },
-        ].map((item, i) => (
-          <div
-            class="px-8 py-10"
-            style={{
-              borderTop: '1px solid rgba(0,0,0,0.12)',
-              borderLeft: i > 0 ? '1px solid rgba(0,0,0,0.12)' : 'none',
-            }}
-          >
-            <p class="font-sans text-black leading-none mb-3" style="font-weight: 900; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.04em;">
-              {item.stat}
-            </p>
-            <p class="font-mono text-[10px] text-black/40 uppercase tracking-widest">{item.label}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <!-- ================================================================
        TESTIMONIALS — NEWSPAPER PULL QUOTE FORMAT
